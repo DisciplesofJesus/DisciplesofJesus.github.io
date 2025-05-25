@@ -13,9 +13,8 @@
             color: #22223b;
         }
         header {
-            background: #22223b;
-            color: #fff;
-            padding: 0 0 1rem 0;
+            background: none;
+            padding: 2rem 0 1.5rem 0;
             text-align: center;
             position: relative;
         }
@@ -25,6 +24,21 @@
             object-fit: cover;
             border-bottom-left-radius: 32px;
             border-bottom-right-radius: 32px;
+            margin-bottom: -80px;
+        }
+        .logo-title {
+            margin-top: 0;
+        }
+        .logo-title span {
+            display: inline-block;
+            font-size: 3.5em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #22223b;
+            text-shadow: 0 4px 24px rgba(74,78,105,0.08), 0 1px 0 #fff;
+            border-radius: 18px;
+            padding: 0.2em 1em;
         }
         header h1 {
             margin: 0.5rem 0 0 0;
@@ -157,6 +171,46 @@
             padding: 1.5rem 0 1rem 0;
             font-size: 1rem;
         }
+        .section-flex {
+            display: flex;
+            align-items: stretch;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .section-flex.reverse {
+            flex-direction: row-reverse;
+        }
+        .side-img-wrapper {
+            flex: 0 0 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .side-img {
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(34,34,59,0.08);
+            width: 320px;
+            max-width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .side-img:hover,
+        img[onclick]:hover {
+            transform: scale(1.04) rotate(-2deg);
+            box-shadow: 0 8px 32px rgba(34,34,59,0.18);
+        }
+        .side-img-square {
+            aspect-ratio: 1 / 1;
+        }
+        .side-text {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         @media (max-width: 600px) {
             main {
                 padding: 1rem;
@@ -178,93 +232,116 @@
                 font-size: 2rem;
             }
         }
+        @media (max-width: 900px) {
+            .section-flex,
+            .section-flex.reverse {
+                flex-direction: column !important;
+                gap: 1.2rem;
+            }
+            .side-img-wrapper {
+                width: 100%;
+            }
+            .side-img {
+                width: 100%;
+                height: 160px;
+            }
+            img[onclick] {
+                width: 100% !important;
+                height: 140px !important;
+                max-width: 100vw !important;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <img src="Header.jpg" alt="Disciples of Jesus Header" class="header-img">
-        <h1 style="
-            margin: 0.5rem 0 0 0;
-            font-size: 3rem;
-            letter-spacing: 3px;
-            font-weight: 900;
-            background: linear-gradient(90deg, #f7b267 10%, #4a4e69 60%, #9a8c98 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            text-shadow: 0 4px 24px rgba(74,78,105,0.18), 0 1px 0 #fff;
-            display: inline-block;
-            padding: 0.2em 0.8em;
-            border-radius: 18px;
-        ">
-            <span style="vertical-align:middle;display:inline-block;">
-                <svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align:middle;margin-right:0.3em;">
-                    <circle cx="18" cy="18" r="16" fill="#f7b267" stroke="#fff" stroke-width="2"/>
-                    <text x="18" y="24" text-anchor="middle" font-size="18" fill="#fff" font-family="Montserrat,Arial,sans-serif" font-weight="bold">✝</text>
-                </svg>
-                Disciples of Jesus
-            </span>
-        </h1>
-        <p style="font-size:1.2rem;letter-spacing:1px;margin-top:0.2em;color:#f7b267;font-weight:600;">
-            Gemeinsam auf dem Fundament von Jesus bauen
-        </p>
+    <header style="background:none;padding:2rem 0 1.5rem 0;">
+        <img src="Header.jpg" alt="Disciples of Jesus Header" class="header-img" style="margin-bottom:-80px;">
+        <div class="logo-title" style="margin-top:0;">
+            <div style="text-align:center;">
+                <span style="
+                    display:inline-block;
+                    font-size:3.5em;
+                    font-family: 'Montserrat', Arial, sans-serif;
+                    font-weight: 900;
+                    letter-spacing: 4px;
+                    color: #22223b;
+                    text-shadow: 0 4px 24px rgba(74,78,105,0.08), 0 1px 0 #fff;
+                    border-radius: 18px;
+                    padding: 0.2em 1em;
+                ">
+                    Disciples of Jesus
+                </span>
+            </div>
+        </div>
     </header>
     <main>
-        <section class="fade-in">
-            <h2>Was wir tun</h2>
-            <p>
-                Wir helfen dir, auf dem Fundament von Jesus zu bauen mit klarer Lehre und echter Beziehung. Wir zeigen dir, wie du das Evangelium weitergeben kannst verständlich, praktisch und aus Liebe. Wir trainieren dich, andere zu Jüngern zu machen, so wie Jesus es uns befohlen hat (Matthäus 28,19–20; Markus 16,15). Wir sind für dich da online oder vor Ort, Hand in Hand in tiefer Gemeinschaft. Du bist nicht allein. Jesus ruft und wir helfen dir, deine Berufung zu erkennen und zu leben.
-            </p>
-        </section>
-        <section class="fade-in">
-            <h2>Die Ernte ist reif <span aria-label="Ernte" role="img">🌾</span></h2>
-            <div class="highlight">
-                „Die Ernte ist groß, aber es sind wenige Arbeiter.“ (Matthäus 9,37)
+        <section class="fade-in section-flex">
+            <div class="side-img-wrapper">
+                <img src="Gesamttreffen .jpg" alt="Gesamttreffen" class="side-img" onclick="openModal(this)">
             </div>
-            <p>
-                Wir glauben jetzt ist die Zeit. Jesus bereitet Herzen vor und ruft uns, gemeinsam mit ihm die Ernte einzubringen. Menschen suchen nach Hoffnung, Wahrheit und Liebe. Egal, ob du Jesus schon kennst oder gerade anfängst, nach ihm zu fragen wir wollen dich mitnehmen, Schritt für Schritt. Denn jeder hat einen Platz in Gottes Königreich.
-            </p>
-        </section>
-        <section class="fade-in">
-            <div class="gallery">
-                <img src="Gesamttreffen .jpg" alt="Gesamttreffen">
-                <img src="Evangelisation Koblenz  (19.04.2025).jpg" alt="Evangelisation Koblenz 19.04.2025">
-                <img src="Evangelisation Koblenz  (01.03.2025).jpg" alt="Evangelisation Koblenz 01.03.2025">
+            <div class="side-text">
+                <h2>Was wir tun</h2>
+                <p>
+                    Wir helfen dir, auf dem Fundament von Jesus zu bauen mit klarer Lehre und echter Beziehung. Wir zeigen dir, wie du das Evangelium weitergeben kannst verständlich, praktisch und aus Liebe. Wir trainieren dich, andere zu Jüngern zu machen, so wie Jesus es uns befohlen hat (Matthäus 28,19–20; Markus 16,15). Wir sind für dich da online oder vor Ort, Hand in Hand in tiefer Gemeinschaft. Du bist nicht allein. Jesus ruft und wir helfen dir, deine Berufung zu erkennen und zu leben.
+                </p>
             </div>
         </section>
-        <section class="fade-in">
-            <h2>Wie wir Gemeinde leben</h2>
-            <p>
-                Alles begann damit, dass ich Leon mein Herz für Jesus geöffnet habe.<br>
-                Nach dem Verlust meines Vaters, meines Onkels und vor allem meiner Mutter, die schwer an Krebs erkrankt war, habe ich auf schmerzhafte Weise erkannt, wie zerbrechlich das Leben ist.<br>
-                Die Zeit an ihrer Seite all die Arztbesuche, das Hoffen, das Kämpfen hat mir eines ganz klar gemacht: Ohne Jesus hat das Leben keinen Sinn und keine Hoffnung. Aber mit ihm gibt es Hoffnung eine Hoffnung, die über den Tod hinausgeht. Diese Erkenntnis hat mein Leben komplett verändert. Ich entschied mich, mein ganzes Leben Jesus zu widmen und sein Evangelium zu verkünden, solange ich atme.
-            </p>
-            <p>
-                Mit einem Bruder begann ich, auf die Straße zu gehen. Wir beteten für Menschen, redeten über Jesus und fingen an, echte Gemeinschaft zu leben. Wie in der Apostelgeschichte teilten wir unser Leben miteinander.<br>
-                Dabei suchten wir gezielt nach Menschen, die mehr von Jesus wollten. Und Schritt für Schritt führten wir sie auf das feste Fundament von Jesus (1. Korinther 3,11) und lehrten sie, selbst Jünger zu machen genau so, wie Jesus es uns aufgetragen hat (Matthäus 28,19–20). Aus kleinen Treffen entstand eine wachsende Bewegung.
-            </p>
-            <p>
-                In den letzten Jahren haben wir angefangen, Hausgemeinden zu gründen und Menschen in Leiterschaft zu trainieren, damit sie dasselbe weitergeben, was sie selbst empfangen haben. Nicht, weil wir groß oder besonders sind sondern weil Jesus wirkt, wenn wir anfangen, seinen Auftrag zu leben. Dann wird er auch nach außen sichtbar. Amen.
-            </p>
-        </section>
-        <section class="fade-in" style="text-align:center;">
-            <h2>Video-Einblick</h2>
-            <div style="display:inline-block;position:relative;width:100%;max-width:250px;aspect-ratio:9/16;">
-                <iframe src="https://www.youtube.com/embed/jStcmbnHPPA"
-                        title="YouTube Video"
-                        allowfullscreen
-                        style="border-radius:16px;width:100%;height:100%;border:none;position:absolute;top:0;left:0;">
-                </iframe>
+        <section class="fade-in section-flex reverse">
+            <div class="side-img-wrapper">
+                <img src="Evangelisation Koblenz  (19.04.2025).jpg" alt="Evangelisation Koblenz 19.04.2025" class="side-img" onclick="openModal(this)">
+            </div>
+            <div class="side-text">
+                <h2>Die Ernte ist reif <span aria-label="Ernte" role="img">🌾</span></h2>
+                <div class="highlight">
+                    „Die Ernte ist groß, aber es sind wenige Arbeiter.“ (Matthäus 9,37)
+                </div>
+                <p>
+                    Wir glauben jetzt ist die Zeit. Jesus bereitet Herzen vor und ruft uns, gemeinsam mit ihm die Ernte einzubringen. Menschen suchen nach Hoffnung, Wahrheit und Liebe. Egal, ob du Jesus schon kennst oder gerade anfängst, nach ihm zu fragen wir wollen dich mitnehmen, Schritt für Schritt. Denn jeder hat einen Platz in Gottes Königreich.
+                </p>
             </div>
         </section>
-        <section class="fade-in">
-            <h2>Unser Ansatz: Gemeinsam lernen und handeln</h2>
-            <ul>
-                <li>Vormachen – Mitmachen – Selbermachen – Weitermachen: Wir zeigen dir, wie es geht, und begleiten dich, bis du sicher bist, es selbst umzusetzen.</li>
-                <li>Werkzeuge wie „Drei Kreise“ und „Vier Felder“: Bewährte Methoden, um das Evangelium zu teilen und eine geistliche Bewegung aufzubauen.</li>
-                <li>Individuelle Begleitung: Wir stehen dir praktisch und geistlich zur Seite – egal, ob du eine Gruppe gründen möchtest oder nach Gemeinschaft suchst.</li>
-            </ul>
+        <section class="fade-in section-flex">
+
+            <div class="side-text" style="flex:2;">
+                <h2>Wie wir Gemeinde leben</h2>
+                <p>
+                    Alles begann damit, dass ich Leon mein Herz für Jesus geöffnet habe.<br>
+                    Nach dem Verlust meines Vaters, meines Onkels und vor allem meiner Mutter, die schwer an Krebs erkrankt war, habe ich auf schmerzhafte Weise erkannt, wie zerbrechlich das Leben ist.<br>
+                    Die Zeit an ihrer Seite all die Arztbesuche, das Hoffen, das Kämpfen hat mir eines ganz klar gemacht: Ohne Jesus hat das Leben keinen Sinn und keine Hoffnung. Aber mit ihm gibt es Hoffnung eine Hoffnung, die über den Tod hinausgeht. Diese Erkenntnis hat mein Leben komplett verändert. Ich entschied mich, mein ganzes Leben Jesus zu widmen und sein Evangelium zu verkünden, solange ich atme.
+                </p>
+                <p>
+                    Mit einem Bruder begann ich, auf die Straße zu gehen. Wir beteten für Menschen, redeten über Jesus und fingen an, echte Gemeinschaft zu leben. Wie in der Apostelgeschichte teilten wir unser Leben miteinander.<br>
+                    Dabei suchten wir gezielt nach Menschen, die mehr von Jesus wollten. Und Schritt für Schritt führten wir sie auf das feste Fundament von Jesus (1. Korinther 3,11) und lehrten sie, selbst Jünger zu machen genau so, wie Jesus es uns aufgetragen hat (Matthäus 28,19–20). Aus kleinen Treffen entstand eine wachsende Bewegung.
+                </p>
+                <p>
+                    In den letzten Jahren haben wir angefangen, Hausgemeinden zu gründen und Menschen in Leiterschaft zu trainieren, damit sie dasselbe weitergeben, was sie selbst empfangen haben. Nicht, weil wir groß oder besonders sind sondern weil Jesus wirkt, wenn wir anfangen, seinen Auftrag zu leben. Dann wird er auch nach außen sichtbar. Amen.
+                </p>
+            </div>
+        </section>
+        <!-- Querformat-Bild links über "Unser Ansatz" -->
+        <div class="fade-in" style="display:flex;justify-content:flex-start;margin-bottom:1.5rem;">
+            <img src="Evangelisation Koblenz  (01.03.2025).jpg" alt="Evangelisation Koblenz 01.03.2025"
+                 style="width:100%;max-width:420px;height:220px;object-fit:cover;border-radius:16px;box-shadow:0 2px 12px rgba(34,34,59,0.08);cursor:pointer;transition:transform 0.3s, box-shadow 0.3s;margin-left:0;"
+                 onclick="openModal(this)">
+        </div>
+        <section class="fade-in section-flex" style="align-items: flex-start;">
+            <div class="side-text" style="flex:2;">
+                <h2>Unser Ansatz: Gemeinsam lernen und handeln</h2>
+                <ul>
+                    <li>Vormachen – Mitmachen – Selbermachen – Weitermachen: Wir zeigen dir, wie es geht, und begleiten dich, bis du sicher bist, es selbst umzusetzen.</li>
+                    <li>Werkzeuge wie „Drei Kreise“ und „Vier Felder“: Bewährte Methoden, um das Evangelium zu teilen und eine geistliche Bewegung aufzubauen.</li>
+                    <li>Individuelle Begleitung: Wir stehen dir praktisch und geistlich zur Seite – egal, ob du eine Gruppe gründen möchtest oder nach Gemeinschaft suchst.</li>
+                </ul>
+            </div>
+            <div style="flex:1;display:flex;justify-content:center;">
+                <div style="display:inline-block;position:relative;width:100%;max-width:250px;aspect-ratio:9/16;">
+                    <iframe src="https://www.youtube.com/embed/jStcmbnHPPA"
+                            title="YouTube Video"
+                            allowfullscreen
+                            style="border-radius:16px;width:100%;height:100%;border:none;position:absolute;top:0;left:0;">
+                    </iframe>
+                </div>
+            </div>
         </section>
         <div class="cta fade-in">
             <strong>Sei ein Teil der Bewegung!</strong><br><br>
@@ -272,23 +349,46 @@
             <br>
             <em>Melde dich bei uns – wir helfen dir, deinen Platz in Gottes Reich zu finden und sein Licht in die Welt zu tragen.</em>
         </div>
-        <section class="fade-in" id="kontakt" style="margin-top:2.5rem;">
-            <h2>Kontakt</h2>
-            <div style="text-align:center;">
-                <p>
-                    Schreibe uns eine E-Mail an:<br>
-                    <a href="mailto:Hausgemeinde@web.de" style="color:#4a4e69;font-weight:bold;">Hausgemeinde@web.de</a>
-                </p>
-                <p>
-                    Oder trete unserer Community auf Discord bei:<br>
-                    <a href="https://discord.gg/2EDjeSDqTU" target="_blank" style="display:inline-flex;align-items:center;gap:0.5em;text-decoration:none;color:#5865F2;font-weight:bold;">
-                        <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/discord.svg" alt="Discord" width="28" height="28" style="vertical-align:middle;">
-                        Zum Discord-Server
-                    </a>
-                </p>
+        <section class="fade-in" id="kontakt-spenden" style="margin-top:2.5rem;">
+            <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:stretch;">
+                <!-- Kontakt -->
+                <div style="flex:1 1 260px;min-width:220px;max-width:340px;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(34,34,59,0.08);padding:1.5rem 1.2rem;text-align:center;">
+                    <h2>Kontakt</h2>
+                    <p>
+                        Schreibe uns eine E-Mail an:<br>
+                        <a href="mailto:Hausgemeinde@web.de" style="color:#4a4e69;font-weight:bold;">Hausgemeinde@web.de</a>
+                    </p>
+                    <p>
+                        Oder trete unserer Community auf Discord bei:<br>
+                        <a href="https://discord.gg/2EDjeSDqTU" target="_blank" style="display:inline-flex;align-items:center;gap:0.5em;text-decoration:none;color:#5865F2;font-weight:bold;">
+                            <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/discord.svg" alt="Discord" width="28" height="28" style="vertical-align:middle;">
+                            Zum Discord-Server
+                        </a>
+                    </p>
+                </div>
+                <!-- Spendenkonto -->
+                <div style="flex:1 1 220px;min-width:200px;max-width:320px;background:linear-gradient(90deg,#f7b267 10%,#4a4e69 90%);color:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(74,78,105,0.10);padding:1.5rem 1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+                    <h2 style="margin-top:0;color:#fff;letter-spacing:2px;font-size:1.3em;">Unser Spendenkonto</h2>
+                    <div style="margin:1em 0 0.5em 0;font-size:1.1em;letter-spacing:1px;">
+                        <strong>IBAN:</strong><br>
+                        <span style="font-size:1em;letter-spacing:2px;">DE58&nbsp;1001&nbsp;1001&nbsp;2007&nbsp;6025&nbsp;32</span>
+                    </div>
+                    <div style="margin:0.5em 0;">
+                        <strong>BIC:</strong><br>
+                        <span style="font-size:1em;">NTSBDEB1XXX</span>
+                    </div>
+                    <div style="margin:0.5em 0 0.5em 0;">
+                        <strong>Kontoinhaber:</strong><br>
+                        <span style="font-size:1em;">MARVIN SAND</span>
+                    </div>
+                    <div style="margin-top:1em;font-size:0.95em;opacity:0.85;">
+                        Vielen Dank für deine Unterstützung! <span aria-label="Herz" style="font-size:1.1em;">❤️</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
+    <!-- Modal für Bildvergrößerung -->
     <div class="modal" id="imgModal">
         <span class="modal-close" id="modalClose">&times;</span>
         <img src="" alt="Großansicht" id="modalImg">
@@ -335,6 +435,21 @@
             h2.addEventListener('mouseleave', function() {
                 this.style.color = '';
             });
+        });
+
+        function openModal(img) {
+            document.getElementById('modalImg').src = img.src;
+            document.getElementById('imgModal').classList.add('active');
+        }
+        document.getElementById('modalClose').addEventListener('click', function() {
+            document.getElementById('imgModal').classList.remove('active');
+            document.getElementById('modalImg').src = '';
+        });
+        document.getElementById('imgModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.getElementById('modalImg').src = '';
+            }
         });
     </script>
 </body>
