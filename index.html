@@ -1,606 +1,474 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disciples of Jesus</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/tan-pearl" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700&display=swap');
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2eafc 100%);
-            margin: 0;
-            color: #22223b;
-        }
-        header {
-            background: none;
-            padding: 0 0 1.5rem 0;
-            text-align: center;
-            position: relative;
-        }
-        .header-img {
-            width: 100%;
-            max-height: 320px;
-            object-fit: cover;
-            border-bottom-left-radius: 32px;
-            border-bottom-right-radius: 32px;
-            margin-bottom: -80px;
-            margin-top: 40px;
-        }
-        .logo-title {
-            margin-top: 0;
-        }
-        .logo-title span {
-            display: inline-block;
-            font-size: 3.5em;
-            font-family: 'TAN PEARL', cursive, Arial, sans-serif; /* Nur Tan Pearl als erste Wahl */
-            font-weight: 400; /* Tan Pearl ist meist nicht bold */
-            letter-spacing: 4px;
-            color: #22223b;
-            text-shadow: 0 4px 24px rgba(74,78,105,0.08), 0 1px 0 #fff;
-            border-radius: 18px;
-            padding: 0.2em 1em;
-            background: rgba(255,255,255,0.0); /* voll transparent */
-        }
-        .logo-title .logo-sub {
-            font-family: 'Playfair Display', serif !important;
-            font-size: 1.2em;
-            color: #4a4e69;
-            margin-top: 0.3em;
-            letter-spacing: 0.18em; /* Größere Buchstabenabstände */
-            font-weight: 500;
-            background: rgba(255,255,255,0.0); /* voll transparent */
-            display: block;
-            padding: 0.1em 2.5em 0.2em 2.5em;
-            border-radius: 12px;
-            min-width: 320px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        header h1 {
-            margin: 0.5rem 0 0 0;
-            font-size: 3rem;
-            letter-spacing: 3px;
-            font-weight: 900;
-            background: linear-gradient(90deg, #f7b267 10%, #4a4e69 60%, #9a8c98 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            text-shadow: 0 4px 24px rgba(74,78,105,0.18), 0 1px 0 #fff;
-            display: inline-block;
-            padding: 0.2em 0.8em;
-            border-radius: 18px;
-        }
-        header h1 svg {
-            vertical-align: middle;
-            margin-right: 0.3em;
-        }
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(34,34,59,0.07);
-            padding: 2.5rem 2rem;
-        }
-        section {
-            margin-bottom: 2.5rem;
-        }
-        h2 {
-            color: #4a4e69;
-            margin-top: 0;
-            transition: color 0.3s;
-        }
-        .highlight {
-            background: #f7f1e3;
-            border-left: 5px solid #9a8c98;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            font-style: italic;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-        .gallery img {
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(34,34,59,0.08);
-            width: 270px;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-        .gallery img:hover {
-            transform: scale(1.08) rotate(-2deg);
-            box-shadow: 0 8px 32px rgba(34,34,59,0.18);
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        ul li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        ul li:before {
-            content: "🔹";
-            position: absolute;
-            left: 0;
-        }
-        .cta {
-            background: linear-gradient(90deg, #4a4e69 60%, #9a8c98 100%);
-            color: #fff;
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.2rem;
-            margin-top: 2rem;
-            box-shadow: 0 2px 16px rgba(74,78,105,0.08);
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s, transform 1s;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(34,34,59,0.85);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal img {
-            max-width: 90vw;
-            max-height: 80vh;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(34,34,59,0.28);
-        }
-        .modal.active {
-            display: flex;
-        }
-        .modal-close {
-            position: absolute;
-            top: 32px;
-            right: 48px;
-            color: #fff;
-            font-size: 2.5rem;
-            cursor: pointer;
-            z-index: 1001;
-            font-weight: bold;
-            text-shadow: 0 2px 8px #22223b;
-        }
-        footer {
-            text-align: center;
-            color: #9a8c98;
-            padding: 1.5rem 0 1rem 0;
-            font-size: 1rem;
-        }
-        .section-flex {
-            display: flex;
-            align-items: stretch;
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-        .section-flex.reverse {
-            flex-direction: row-reverse;
-        }
-        .side-img-wrapper {
-            flex: 0 0 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0; /* Abstand unten entfernen */
-        }
-        .side-img {
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(34,34,59,0.08);
-            width: 320px;
-            max-width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            margin-bottom: 0; /* Abstand unten entfernen */
-        }
-        .side-img:hover,
-        img[onclick]:hover,
-        .quer-img:hover {
-            transform: scale(1.04) rotate(-2deg);
-            box-shadow: 0 8px 32px rgba(34,34,59,0.18);
-        }
-        .side-text {
-            flex: 1 1 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .quer-img-wrapper {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 1.2rem;
-            margin-top: -0.5rem;
-        }
-        .quer-img {
-            width: 100%;
-            max-width: 420px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(34,34,59,0.08);
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-bottom: 0; /* Abstand unten entfernen */
-        }
-        .video-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-width: 180px;
-        }
-        .video-inner {
-            display: inline-block;
-            position: relative;
-            width: 100%;
-            max-width: 220px;
-            aspect-ratio: 9/16;
-        }
-        @media (max-width: 600px) {
-            main {
-                padding: 1rem;
-            }
-            header h1 {
-                font-size: 1.5rem;
-            }
-            .gallery img {
-                width: 100%;
-                height: 140px;
-            }
-            .modal img {
-                max-width: 98vw;
-                max-height: 60vh;
-            }
-            .modal-close {
-                top: 12px;
-                right: 18px;
-                font-size: 2rem;
-            }
-        }
-        @media (max-width: 900px) {
-            .section-flex,
-            .section-flex.reverse {
-                flex-direction: column !important;
-                gap: 0 !important;
-                margin-bottom: 0 !important;
-            }
-            .side-img-wrapper {
-                width: 100%;
-                margin-bottom: -1.2rem !important; /* Noch stärker negativer Abstand */
-                padding-bottom: 0 !important;
-            }
-            .side-img {
-                width: 100% !important;
-                height: 180px !important;   /* Größer für Handy */
-                max-width: 100vw !important;
-            }
-            .side-text {
-                margin-top: -1.2rem !important; /* Text direkt ans Bild */
-            }
-            .quer-img {
-                width: 100% !important;
-                max-width: 100vw !important;
-                height: 180px !important;   /* Größer für Handy */
-            }
-            .video-wrapper {
-                display: block !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                min-width: 0 !important;
-                margin: 0 auto !important;
-                padding: 0 !important;
-                height: auto !important;
-            }
-            .video-inner {
-                display: block !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                min-width: 0 !important;
-                margin: 0 auto !important;
-                aspect-ratio: unset !important;
-                height: auto !important;
-            }
-            .video-inner iframe {
-                width: 100% !important;
-                height: 56vw !important; /* 16:9 Verhältnis */
-                min-height: 160px !important;
-                max-height: 320px !important;
-                display: block !important;
-                border-radius: 16px !important;
-            }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disciples of Jesus</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/tan-pearl" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700&display=swap');
 
-        /* Stelle sicher, dass .logo-title span und .logo-sub keinen weißen Hintergrund haben */
-        .logo-title span,
-        .logo-title .logo-sub {
-            background: rgba(255,255,255,0) !important;
-        }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2eafc 100%);
+      margin: 0;
+      color: #22223b;
+    }
 
-        /* Desktop: Untertitel unter Haupttitel */
-        .logo-title {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
-        }
-        .logo-title .logo-sub {
-            display: block;
-            margin-top: 0.1em;
-        }
+    header {
+      text-align: center;
+      padding: 0 0 1.5rem 0;
+      position: relative;
+      background: none;
+    }
 
-        /* Handy: Untertitel bleibt unter Haupttitel */
-        @media (max-width: 900px) {
-            .logo-title {
-                flex-direction: column;
-                align-items: center;
-            }
-            .logo-title .logo-sub {
-                font-size: 1em;
-                margin-top: 0.1em;
-            }
-        }
-    </style>
+    .header-img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+      margin-top: 40px;
+    }
+
+    .logo-title {
+      position: absolute;
+      top: -135px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .logo-title span {
+      font-size: 3.5em;
+      font-family: 'TAN PEARL', cursive, Arial, sans-serif;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: #22223b;
+      text-shadow: 0 4px 24px rgba(74,78,105,0.08), 0 1px 0 #fff;
+      background: transparent;
+      border-radius: 18px;
+      padding: 0.2em 1em;
+    }
+
+    .logo-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2em;
+      color: #4a4e69;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      background: transparent;
+      display: block;
+      padding: 0.1em 2.5em 0.2em 2.5em;
+      border-radius: 12px;
+      min-width: 320px;
+      width: fit-content;
+      margin: 0.1em auto 0;
+    }
+
+    header h1 {
+      margin: 0.5rem 0 0;
+      font-size: 3rem;
+      letter-spacing: 3px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #f7b267 10%, #4a4e69 60%, #9a8c98 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      text-shadow: 0 4px 24px rgba(74,78,105,0.18), 0 1px 0 #fff;
+      display: inline-block;
+      padding: 0.2em 0.8em;
+      border-radius: 18px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(34,34,59,0.07);
+      padding: 2.5rem 2rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #4a4e69;
+      margin-top: 0;
+      transition: color 0.3s;
+    }
+
+    .highlight {
+      background: #f7f1e3;
+      border-left: 5px solid #9a8c98;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .gallery img,
+    .side-img,
+    .quer-img {
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(34,34,59,0.08);
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery img:hover,
+    .side-img:hover,
+    .quer-img:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px rgba(34,34,59,0.18);
+    }
+
+    .side-img {
+      width: 320px;
+      height: 220px;
+    }
+
+    .quer-img {
+      width: 100%;
+      max-width: 420px;
+      height: 220px;
+    }
+
+    .section-flex {
+      display: flex;
+      align-items: stretch;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-flex.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .side-text {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s, transform 1s;
+      margin-bottom: 1rem;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quer-img-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0;
+    }
+
+    .video-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-width: 180px;
+    }
+
+    .video-inner {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: 220px;
+      border-radius: 16px;
+      border: none;
+      display: block;
+    }
+
+    .cta {
+      background: linear-gradient(90deg, #4a4e69 60%, #9a8c98 100%);
+      color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      box-shadow: 0 2px 16px rgba(74,78,105,0.08);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(34,34,59,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(34,34,59,0.28);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 32px;
+      right: 48px;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+      z-index: 1001;
+      font-weight: bold;
+      text-shadow: 0 2px 8px #22223b;
+    }
+
+    footer {
+      text-align: center;
+      color: #9a8c98;
+      padding: 1.5rem 0;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .section-flex,
+      .section-flex.reverse {
+        flex-direction: column !important;
+        gap: 1rem !important;
+      }
+      .side-img,
+      .quer-img {
+        width: 100% !important;
+        height: 180px !important;
+      }
+      .video-inner iframe {
+        height: 56vw !important;
+      }
+      .logo-title {
+        top: -90px !important; /* statt -135px, Logo etwas weiter unten auf dem Handy */
+      }
+    }
+  </style>
 </head>
 <body>
-    <header style="background:none;padding:0 0 1.5rem 0;">
-        <div style="position:relative;">
-            <img src="Header.jpg" alt="Disciples of Jesus Header" class="header-img" style="margin-bottom:-80px;">
-            <div class="logo-title" style="position:absolute;top:-135px;left:0;width:100%;text-align:center;z-index:2;">
-                <img src="DisciplesOfJesusLogo.png" alt="Disciples of Jesus Logo" style="max-width:420px;width:90vw;height:auto;display:block;margin:0 auto;">
-                <div class="logo-sub" style="
-                    font-family: 'Montserrat', Arial, sans-serif;
-                    font-size: 2.0em;
-                    color: #4a4e69;
-                    margin-top: 0.3em;
-                    letter-spacing: 1px;
-                    font-weight: 500;
-                    background: rgba(255,255,255,0.0);
-                    display: block;
-                    padding: 0.1em 1em 0.2em 1em;
-                    border-radius: 12px;
-                ">
-                    Verändere dein Leben in Christus
-                </div>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section class="fade-in section-flex">
-            <div class="side-img-wrapper">
-                <img src="Gesamttreffen .jpg" alt="Gesamttreffen" class="side-img" onclick="openModal(this)">
-            </div>
-            <div class="side-text">
-                <h2>Willkommen bei Disciples of Jesus</h2>
-                <p>
-
-Jesus verändert Leben und wir helfen dir, in dieser Veränderung zu wachsen.
-Wir glauben: Jeder kann lernen, Jesus wirklich nachzufolgen klar, verbindlich und in echter Gemeinschaft.
-Hier bist du richtig, wenn du echte Nachfolge leben willst mit ganzem Herzen, in Gemeinschaft und mit Jesus im Mittelpunkt.
-                </p>
-            </div>
-        </section>
-        <section class="fade-in section-flex reverse">
-            <div class="side-img-wrapper">
-                <img src="Evangelisation Koblenz  (19.04.2025).jpg" alt="Evangelisation Koblenz 19.04.2025" class="side-img" onclick="openModal(this)">
-            </div>
-            <div class="side-text">
-                <h2>Wer wir sind und was uns antreibt
- <span aria-label="Ernte" role="img"></span></h2>
-                <div class="highlight">
-                    „Die Ernte ist groß, aber es sind wenige Arbeiter.“ (Matthäus 9,37)
-                </div>
-                <p>
-Wir sind Jünger von Jesus. Unser Leben gehört ihm. Wir wollen leben, was er uns beigebracht hat, und seinen Auftrag erfüllen:
-alle Nationen zu Jüngern machen, sie taufen und lehren, alles zu halten, was er geboten hat (Matthäus 28,19–20).
-Unsere Leidenschaft ist es, Menschen zu helfen, Jesus mit ganzem Herzen nachzufolgen nicht halbherzig, sondern klar und mit Hingabe.
-Unsere Grundlage ist das Evangelium. Wir glauben, dass echte Nachfolge in Gemeinschaft stattfindet ehrlich, verbindlich und alltagsnah.
-                </p>
-            </div>
-        </section>
-        <section class="fade-in section-flex">
-            <div class="side-text" style="flex:2;">
-                <br>
-                <h2>Was wir tun und wie wir dich begleiten</h2>
-                <p>
-                    Wir helfen dir, auf dem festen Fundament von Jesus zu bauen – mit biblischer Lehre, praktischer Begleitung und echter Beziehung.<br>
-                    Bei uns lernst du:
-                </p>
-                <ul>
-                    <li>wie du im Glauben wächst – gemeinsam mit anderen</li>
-                    <li>wie du das Evangelium klar, ehrlich und mit Liebe weitergeben kannst (Markus 16,15)</li>
-                    <li>wie du andere zu Jüngern machst – so wie Jesus es selbst vorgelebt hat</li>
-                    <li>wie Nachfolge im Alltag konkret aussieht – online oder vor Ort, Hand in Hand mit anderen</li>
-                </ul>
-                <p>
-                    Wir leben Hausgemeinde wie in der Apostelgeschichte: verbindlich, geistlich stark und nahbar.<br>
-                    Durch Gebet, Jüngerschaft und Multiplikation entsteht echte Gemeinschaft – Haus für Haus.
-                </p>
-            </div>
-        </section>
-        <!-- Querformat-Bild links über "Unser Ansatz" -->
-        <div class="fade-in quer-img-wrapper">
-            <img src="Evangelisation Koblenz  (01.03.2025).jpg" alt="Evangelisation Koblenz 01.03.2025"
-                 class="quer-img"
-                 onclick="openModal(this)">
-        </div>
-        <section class="fade-in section-flex" style="align-items: flex-start;">
-            <div class="side-text" style="flex:2;">
-                <h2>Für wen das ist und wie du starten kannst</h2>
-                <div style="background:rgba(247,241,227,0.7);border-left:5px solid #9a8c98;padding:1.2em 1.2em 1em 1.5em;border-radius:14px;margin-bottom:1.2em;box-shadow:0 2px 12px rgba(74,78,105,0.06);">
-                    <p style="margin:0 0 0.7em 0;font-size:1.13em;">
-                        Egal, ob du ganz neu suchst oder schon lange mit Jesus unterwegs bist:<br>
-                        <span style="color:#4a4e69;">Hier findest du geistliche Familie, Klarheit im Glauben und Unterstützung auf deinem Weg.</span>
-                    </p>
-                    <div style="margin:0.7em 0 0.7em 0;">
-                        <span style="font-weight:bold;color:#4a4e69;">Unser Ansatz:</span>
-                        <span style="border-radius:8px;padding:0.15em 0.7em 0.15em 0.7em;margin-left:0.5em;letter-spacing:1px;">
-                            Vormachen – Mitmachen – Selbermachen – Weitermachen
-                        </span>
-                    </div>
-                    <p style="margin:0.7em 0 0.7em 0;">
-                        <span style="color:#22223b;">Mit Werkzeugen wie den <b>„Drei Kreisen“</b> und <b>„Vier Feldern“</b> lernst du, das Evangelium zu teilen und geistliche Bewegung zu leben.</span>
-                    </p>
-                    <p style="margin:0.7em 0 0 0;">
-                        <span style="color:#4a4e69;font-weight:bold;">Und das Wichtigste:</span>
-                        <span style="color:#22223b;"> Du gehst diesen Weg nicht allein. Wir sind für dich da – persönlich, geistlich und verbindlich.</span>
-                    </p>
-                </div>
-                
-            </div>
-            <div class="video-wrapper">
-                <div class="video-inner">
-                    <iframe src="https://www.youtube.com/embed/jStcmbnHPPA"
-                            title="YouTube Video"
-                            allowfullscreen
-                            style="border-radius:16px;width:100%;height:100%;border:none;">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-        <div class="cta fade-in">
-            <strong>Sei ein Teil der Bewegung!</strong><br><br>
-            Die Ernte ist reif, und Gott ruft uns, gemeinsam mit ihm zu arbeiten. Bist du bereit, einen Unterschied zu machen? Oder suchst du Orientierung im Glauben und möchtest mehr über Jesus erfahren?<br>
-            <br>
-            <em>Melde dich bei uns – wir helfen dir, deinen Platz in Gottes Reich zu finden und sein Licht in die Welt zu tragen.</em>
-        </div>
-        <section class="fade-in" id="kontakt-spenden" style="margin-top:2.5rem;">
-            <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:stretch;">
-                <!-- Kontakt -->
-                <div style="flex:1 1 260px;min-width:220px;max-width:340px;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(34,34,59,0.08);padding:1.5rem 1.2rem;text-align:center;">
-                    <h2>Kontakt</h2>
-                    <p>
-                        Schreibe uns eine E-Mail an:<br>
-                        <a href="mailto:Hausgemeinde@web.de" style="color:#4a4e69;font-weight:bold;">Hausgemeinde@web.de</a>
-                    </p>
-                    <p>
-                        Oder trete unserer Community auf Discord bei:<br>
-                        <a href="https://discord.gg/2EDjeSDqTU" target="_blank" style="display:inline-flex;align-items:center;gap:0.5em;text-decoration:none;color:#5865F2;font-weight:bold;">
-                            <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/discord.svg" alt="Discord" width="28" height="28" style="vertical-align:middle;">
-                            Zum Discord-Server
-                        </a>
-                    </p>
-                </div>
-                <!-- Spendenkonto -->
-                <div style="flex:1 1 220px;min-width:200px;max-width:320px;background:linear-gradient(90deg,#f7b267 10%,#4a4e69 90%);color:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(74,78,105,0.10);padding:1.5rem 1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
-                    <h2 style="margin-top:0;color:#fff;letter-spacing:2px;font-size:1.3em;">Unser Spendenkonto</h2>
-                    <div style="margin-bottom:1em;font-size:1.08em;opacity:0.95;">
-                        Wenn Gott es Dir Aufs Herz legt, freuen wir uns über Deine Unterstützung. 
-                    </div>
-                    <div style="margin:1.2em 0 0.5em 0;">
-                        <a href="https://paypal.me/Disciplesofjesus777" target="_blank" style="display:inline-block;text-align:center;">
-                            <img src="Paypal QR Code .png" alt="Paypal QR Code" style="width:140px;max-width:60vw;border-radius:12px;box-shadow:0 2px 12px rgba(34,34,59,0.10);margin-bottom:0.5em;">
-                            <br>
-                            <span style="color:#fff;font-weight:bold;text-decoration:underline;font-size:1.08em;">Per PayPal spenden</span>
-                        </a>
-                    </div>
-                    <div style="margin:1em 0 0.5em 0;font-size:1.1em;letter-spacing:1px;">
-                        <strong>IBAN:</strong><br>
-                        <span style="font-size:1em;letter-spacing:2px;">DE58&nbsp;1001&nbsp;1001&nbsp;2007&nbsp;6025&nbsp;32</span>
-                    </div>
-                    <div style="margin:0.5em 0;">
-                        <strong>BIC:</strong><br>
-                        <span style="font-size:1em;">NTSBDEB1XXX</span>
-                    </div>
-                    <div style="margin:0.5em 0 0.5em 0;">
-                        <strong>Kontoinhaber:</strong><br>
-                        <span style="font-size:1em;">MARVIN SAND</span>
-                    </div>
-                    <div style="margin-top:1em;font-size:0.95em;opacity:0.85;">
-                        Vielen Dank für deine Unterstützung! <span aria-label="Herz" style="font-size:1.1em;">❤️</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <!-- Modal für Bildvergrößerung -->
-    <div class="modal" id="imgModal">
-        <span class="modal-close" id="modalClose">&times;</span>
-        <img src="" alt="Großansicht" id="modalImg">
+  <header>
+    <img src="Header.jpg" alt="Disciples of Jesus Header" class="header-img">
+    <div class="logo-title">
+      <img src="DisciplesOfJesusLogo.png" alt="Disciples of Jesus Logo" style="max-width:420px;width:90vw;height:auto;display:block;margin:0 auto;">
+      <div class="logo-sub">Verändere dein Leben in Christus</div>
     </div>
-    <footer>
-        Der Friede und die Gnade unseres Herrn Jesus Christus seien mit uns allen. Amen.
-    </footer>
-    <script>
-        // Fade-in Animation beim Scrollen
-        function revealOnScroll() {
-            document.querySelectorAll('.fade-in').forEach(function(el) {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 60) {
-                    el.classList.add('visible');
-                }
-            });
+  </header>
+
+  <main>
+    <section class="fade-in section-flex">
+      <div class="side-img-wrapper">
+        <img src="Gesamttreffen .jpg" alt="Gesamttreffen" class="side-img" onclick="openModal(this)">
+      </div>
+      <div class="side-text">
+        <h2>Willkommen bei Disciples of Jesus</h2>
+        <p>Jesus verändert Leben und wir helfen dir, in dieser Veränderung zu wachsen. Wir glauben: Jeder kann lernen, Jesus wirklich nachzufolgen klar, verbindlich und in echter Gemeinschaft. Hier bist du richtig, wenn du echte Nachfolge leben willst mit ganzem Herzen, in Gemeinschaft und mit Jesus im Mittelpunkt.</p>
+      </div>
+    </section>
+
+    <section class="fade-in section-flex reverse">
+      <div class="side-img-wrapper">
+        <img src="Evangelisation Koblenz  (19.04.2025).jpg" alt="Evangelisation Koblenz" class="side-img" onclick="openModal(this)">
+      </div>
+      <div class="side-text">
+        <h2>Wer wir sind und was uns antreibt</h2>
+        <div class="highlight">„Die Ernte ist groß, aber es sind wenige Arbeiter.“ (Matthäus 9,37)</div>
+        <p>Wir sind Jünger von Jesus. Unser Leben gehört ihm. Wir wollen leben, was er uns beigebracht hat, und seinen Auftrag erfüllen: alle Nationen zu Jüngern machen, sie taufen und lehren, alles zu halten, was er geboten hat (Matthäus 28,19–20). Unsere Leidenschaft ist es, Menschen zu helfen, Jesus mit ganzem Herzen nachzufolgen – nicht halbherzig, sondern klar und mit Hingabe.</p>
+      </div>
+    </section>
+
+    <div class="fade-in quer-img-wrapper">
+      <div class="video-inner">
+        <iframe src="https://www.youtube.com/embed/jStcmbnHPPA" title="YouTube Video" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <section class="fade-in section-flex">
+      <div class="side-text">
+        <h2>Was wir tun und wie wir dich begleiten</h2>
+        <p>Wir helfen dir, auf dem festen Fundament von Jesus zu bauen – mit biblischer Lehre, praktischer Begleitung und echter Beziehung.</p>
+        <ul>
+          <li>wie du im Glauben wächst – gemeinsam mit anderen</li>
+          <li>wie du das Evangelium klar, ehrlich und mit Liebe weitergeben kannst (Markus 16,15)</li>
+          <li>wie du andere zu Jüngern machst – so wie Jesus es selbst vorgelebt hat</li>
+          <li>wie Nachfolge im Alltag konkret aussieht – online oder vor Ort, Hand in Hand mit anderen</li>
+        </ul>
+        <p>Wir leben Hausgemeinde wie in der Apostelgeschichte: verbindlich, geistlich stark und nahbar.</p>
+      </div>
+    </section>
+
+    <div class="fade-in quer-img-wrapper">
+      <img src="Evangelisation Koblenz  (01.03.2025).jpg" alt="Evangelisation Koblenz" class="quer-img" onclick="openModal(this)">
+    </div>
+
+    <section class="fade-in section-flex">
+      <div class="side-text">
+        <h2>Für wen das ist und wie du starten kannst</h2>
+        <p style="margin-bottom:1.2em;">
+          Egal, ob du ganz neu suchst oder schon lange mit Jesus unterwegs bist:
+          <br>
+          <span style="display:inline-block;margin-left:1.5em;">
+            Hier findest du geistliche Familie, Klarheit im Glauben und Unterstützung auf deinem Weg.
+          </span>
+        </p>
+        <p style="margin-bottom:1.2em;">
+          <b>Unser Ansatz:</b>
+          <span style="margin-left:1em;">Vormachen – Mitmachen – Selbermachen – Weitermachen</span>
+        </p>
+        <p style="margin-bottom:1.2em;">
+          Mit Werkzeugen wie den <b>„Drei Kreisen“</b> und <b>„Vier Feldern“</b> lernst du, das Evangelium zu teilen und geistliche Bewegung zu leben.
+        </p>
+        <p style="margin-bottom:1.2em;">
+          <b>Und das Wichtigste:</b>
+          <span style="margin-left:1em;">Du gehst diesen Weg nicht allein. Wir sind für dich da – persönlich, geistlich und verbindlich.</span>
+        </p>
+        <div style="margin-top:2em;padding:1em 1.2em;background:linear-gradient(90deg,#f7b26722 10%,#9a8c9822 100%);border-radius:12px;text-align:center;">
+          <span style="font-size:1.13em;color:#4a4e69;font-weight:bold;">Bist du bereit, Schritte im Glauben zu gehen?</span><br>
+          <span style="font-size:1.08em;color:#22223b;">Dann schreib uns – wir freuen uns, dich kennenzulernen.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta fade-in">
+      <strong>Sei ein Teil der Bewegung!</strong><br><br>
+      Die Ernte ist reif, und Gott ruft uns, gemeinsam mit ihm zu arbeiten. Bist du bereit, einen Unterschied zu machen? Oder suchst du Orientierung im Glauben und möchtest mehr über Jesus erfahren?<br><br>
+      <em>Melde dich bei uns – wir helfen dir, deinen Platz in Gottes Reich zu finden und sein Licht in die Welt zu tragen.</em>
+    </div>
+
+    <section class="fade-in section-flex" style="margin-top:2.5rem; gap:2rem;">
+      <!-- Spendenkonto links -->
+      <div style="flex:1 1 220px;min-width:200px;max-width:340px;background:linear-gradient(90deg,#f7b267 10%,#4a4e69 90%);color:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(74,78,105,0.10);padding:1.5rem 1.2rem;text-align:center;display:flex;flex-direction:column;justify-content:center;">
+        <h2 style="margin-top:0;color:#fff;letter-spacing:2px;font-size:1.3em;">Unser Spendenkonto</h2>
+        <div style="margin-bottom:1em;font-size:1.08em;opacity:0.95;">
+          Wenn Gott es Dir aufs Herz legt, freuen wir uns über Deine Unterstützung.
+        </div>
+        <div style="margin:1.2em 0 0.5em 0;">
+          <a href="https://paypal.me/Disciplesofjesus777" target="_blank" style="display:inline-block;text-align:center;">
+            <img src="Paypal QR Code .png" alt="Paypal QR Code" style="width:140px;max-width:60vw;border-radius:12px;box-shadow:0 2px 12px rgba(34,34,59,0.10);margin-bottom:0.5em;">
+            <br>
+            <span style="color:#fff;font-weight:bold;text-decoration:underline;font-size:1.08em;">Per PayPal spenden</span>
+          </a>
+        </div>
+        <div style="margin:1em 0 0.5em 0;font-size:1.1em;letter-spacing:1px;">
+          <strong>IBAN:</strong><br>
+          <span style="font-size:1em;letter-spacing:2px;">DE58&nbsp;1001&nbsp;1001&nbsp;2007&nbsp;6025&nbsp;32</span>
+        </div>
+        <div style="margin:0.5em 0;">
+          <strong>BIC:</strong><br>
+          <span style="font-size:1em;">NTSBDEB1XXX</span>
+        </div>
+        <div style="margin:0.5em 0 0.5em 0;">
+          <strong>Kontoinhaber:</strong><br>
+          <span style="font-size:1em;">MARVIN SAND</span>
+        </div>
+        <div style="margin-top:1em;font-size:0.95em;opacity:0.85;">
+          Vielen Dank für deine Unterstützung! <span aria-label="Herz" style="font-size:1.1em;">❤️</span>
+        </div>
+      </div>
+      <!-- Kontakt rechts -->
+      <div style="flex:1 1 260px;min-width:220px;max-width:340px;background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(34,34,59,0.08);padding:1.5rem 1.2rem;text-align:center;">
+        <h2>Kontakt</h2>
+        <p>
+          Schreibe uns eine E-Mail an:<br>
+          <a href="mailto:Hausgemeinde@web.de" style="color:#4a4e69;font-weight:bold;">Hausgemeinde@web.de</a>
+        </p>
+        <p>
+          Oder trete unserer Community auf Discord bei:<br>
+          <a href="https://discord.gg/2EDjeSDqTU" target="_blank" style="display:inline-flex;align-items:center;gap:0.5em;text-decoration:none;color:#5865F2;font-weight:bold;">
+            <img src="https://cdn.jsdelivr.net/gh/edent/SuperTinyIcons/images/svg/discord.svg" alt="Discord" width="28" height="28" style="vertical-align:middle;">
+            Zum Discord-Server
+          </a>
+        </p>
+      </div>
+    </section>
+    </main>
+
+  <div class="modal" id="imgModal">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <img src="" alt="Großansicht" id="modalImg">
+  </div>
+
+  <footer>
+    Der Friede und die Gnade unseres Herrn Jesus Christus seien mit uns allen. Amen.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.fade-in').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 60) {
+        el.classList.add('visible');
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.fade-in').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          el.classList.add('visible');
         }
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('DOMContentLoaded', revealOnScroll);
+      });
+    });
 
-        // Galerie: Bild in Modal öffnen
-        document.querySelectorAll('.gallery img').forEach(function(img) {
-            img.addEventListener('click', function() {
-                document.getElementById('modalImg').src = this.src;
-                document.getElementById('imgModal').classList.add('active');
-            });
-        });
-        document.getElementById('modalClose').addEventListener('click', function() {
-            document.getElementById('imgModal').classList.remove('active');
-            document.getElementById('modalImg').src = '';
-        });
-        document.getElementById('imgModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('active');
-                document.getElementById('modalImg').src = '';
-            }
-        });
+    function openModal(img) {
+      document.getElementById('modalImg').src = img.src;
+      document.getElementById('imgModal').classList.add('active');
+    }
 
-        // Überschriften beim Hover farbig
-        document.querySelectorAll('h2').forEach(function(h2) {
-            h2.addEventListener('mouseenter', function() {
-                this.style.color = '#9a8c98';
-            });
-            h2.addEventListener('mouseleave', function() {
-                this.style.color = '';
-            });
-        });
+    document.getElementById('modalClose').addEventListener('click', () => {
+      document.getElementById('imgModal').classList.remove('active');
+      document.getElementById('modalImg').src = '';
+    });
 
-        function openModal(img) {
-            document.getElementById('modalImg').src = img.src;
-            document.getElementById('imgModal').classList.add('active');
-        }
-        document.getElementById('modalClose').addEventListener('click', function() {
-            document.getElementById('imgModal').classList.remove('active');
-            document.getElementById('modalImg').src = '';
-        });
-        document.getElementById('imgModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('active');
-                document.getElementById('modalImg').src = '';
-            }
-        });
-    </script>
+    document.getElementById('imgModal').addEventListener('click', e => {
+      if (e.target === e.currentTarget) {
+        e.currentTarget.classList.remove('active');
+        document.getElementById('modalImg').src = '';
+      }
+    });
+
+    document.querySelectorAll('h2').forEach(h2 => {
+      h2.addEventListener('mouseenter', () => h2.style.color = '#9a8c98');
+      h2.addEventListener('mouseleave', () => h2.style.color = '');
+    });
+  </script>
 </body>
 </html>
