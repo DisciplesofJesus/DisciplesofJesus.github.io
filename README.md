@@ -1,1 +1,1 @@
-# DisciplesofJesus.github.io
+# Christ.Followers.github.io
